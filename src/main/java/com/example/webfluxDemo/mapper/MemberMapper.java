@@ -5,7 +5,7 @@ import com.example.webfluxDemo.entity.Member;
 
 public class MemberMapper {
 
-    public static MemberDto mapToMemberDto(Member member) {
+    public static MemberDto toMemberDto(Member member) {
         return new MemberDto(
                 member.getId(),
                 member.getLoginId(),
@@ -16,7 +16,7 @@ public class MemberMapper {
         );
     }
 
-    public static Member mapToMember(MemberDto memberDto) {
+    public static Member toMember(MemberDto memberDto) {
         return new Member(
                 memberDto.getId(),
                 memberDto.getLoginId(),

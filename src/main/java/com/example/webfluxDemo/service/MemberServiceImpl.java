@@ -19,17 +19,17 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Mono<MemberDto> saveMember(MemberDto memberDto) {
-        Member member = MemberMapper.mapToMember(memberDto);
+        Member member = MemberMapper.toMember(memberDto);
         Mono<Member> savedMember = memberRepository.save(member);
         return savedMember
-                .map(MemberMapper::mapToMemberDto);
+                .map(MemberMapper::toMemberDto);
     }
 
     @Override
     public Mono<MemberDto> getMember(String memberId) {
         Mono<Member> foundMember = memberRepository.findById(memberId);
         return foundMember
-                .map(MemberMapper::mapToMemberDto)
+                .map(MemberMapper::toMemberDto)
                 .switchIfEmpty(Mono.empty());
     }
 
@@ -37,7 +37,7 @@ public class MemberServiceImpl implements MemberService {
     public Flux<MemberDto> getAllMember() {
         Flux<Member> allMember = memberRepository.findAll();
         return allMember
-                .map(MemberMapper::mapToMemberDto)
+                .map(MemberMapper::toMemberDto)
                 .switchIfEmpty(Flux.empty());
     }
 
@@ -55,7 +55,7 @@ public class MemberServiceImpl implements MemberService {
                     memberEntity.setUpdatedAt(memberDto.getUpdatedAt());
                     return memberRepository.save(memberEntity);
                 })
-                .map(MemberMapper::mapToMemberDto);
+                .map(MemberMapper::toMemberDto);
     }
 
     @Override
